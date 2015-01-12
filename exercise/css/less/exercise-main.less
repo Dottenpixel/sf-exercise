@@ -1,0 +1,21 @@
+@import "../../../lib/bootstrap/less/bootstrap.less";
+
+.avatar {
+	height: 48px;
+	width: 48px;
+	overflow: hidden;
+	border: 1px solid gray;
+	img {
+		.img-responsive;
+	}	
+}
+
+.appHeader {
+	height: 52px;
+	padding: 2px;
+	box-shadow: 0px 0px 10px fadeout(black, 66%);
+	.img-avatar:extend(.avatar all) {}
+}
+.feedPost {
+	.img-avatar:extend(.avatar all) {}
+}
