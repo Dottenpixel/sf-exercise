@@ -1,0 +1,8 @@
+.DS_Store
+*.swp
+.sass-cache/*
+
+#Gulp-related files
+gulpfile.js
+node_modules/*
+reloadX.html
