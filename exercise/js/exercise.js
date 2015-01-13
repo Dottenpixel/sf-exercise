@@ -144,6 +144,10 @@ var Comment = React.createClass({
 })
 
 var CommentComposeForm = React.createClass({
+	handleChange: function(e) {
+		var submitNode = this.refs.submit.getDOMNode();
+		e.target.value.length > 0 ? submitNode.removeAttribute("disabled") : submitNode.setAttribute("disabled",true);
+  },
 	handleSubmit: function(e) {
 		e.preventDefault();
 		var commentText = this.refs.commentText.getDOMNode().value.trim();
@@ -154,8 +158,8 @@ var CommentComposeForm = React.createClass({
 	render: function() {
 		return (
 			<form className="commentForm" onSubmit={this.handleSubmit}>
-				<input type="text" placeholder="Write a comment..." ref="commentText" />
-				<input type="submit" value="Post" />
+				<input type="text" placeholder="Write a comment..." ref="commentText" onChange={this.handleChange} />
+				<input type="submit" value="Post" disabled="disabled" ref="submit" />
 			</form>
 		);
 	}
