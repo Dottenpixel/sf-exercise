@@ -4,6 +4,7 @@ var userData = {
 	"avatar" : "http://static.giantbomb.com/uploads/scale_small/0/4/12135-homer_simpson.gif"
 };
 var feedData = [{
+	"postid" : 100,
 	"uid" : 1,
 	"name" : "Homer Simpson",
 	"avatar" : "http://static.giantbomb.com/uploads/scale_small/0/4/12135-homer_simpson.gif",
@@ -29,6 +30,7 @@ var feedData = [{
 	}]
 },
 {
+	"postid" : 101,
 	"uid": 2,
 	"name": "John Smith",
 	"avatar" : "http://i.stack.imgur.com/lPgjT.jpg",
@@ -48,6 +50,7 @@ var feedData = [{
 	}]
 },
 {
+	"postid" : 102,
 	"uid": 3,
 	"name": "Jane Smith",
 	"avatar" : "./img",
@@ -67,6 +70,7 @@ var feedData = [{
 	}]
 },
 {
+	"postid" : 103,
 	"uid": 4,
 	"name": "Cleveland Brown",
 	"avatar" : "./img",

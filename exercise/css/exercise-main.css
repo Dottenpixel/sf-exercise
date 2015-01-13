@@ -6285,25 +6285,92 @@ button.close {
     display: none !important;
   }
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
 .avatar,
+.post .img-avatar,
 .appHeader .img-avatar,
-.feedPost .img-avatar {
+.feedPost .img-avatar,
+.postPanel .img-avatar,
+.comment .img-avatar {
+  background: white;
   height: 48px;
   width: 48px;
   overflow: hidden;
   border: 1px solid gray;
 }
 .avatar img,
+.post .img-avatar img,
 .appHeader .img-avatar img,
-.feedPost .img-avatar img {
+.feedPost .img-avatar img,
+.postPanel .img-avatar img,
+.comment .img-avatar img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+.post:before,
+.post:after,
+.feedPost:before,
+.feedPost:after,
+.postPanel:before,
+.postPanel:after,
+.comment:before,
+.comment:after {
+  content: " ";
+  display: table;
+}
+.post:after,
+.feedPost:after,
+.postPanel:after,
+.comment:after {
+  clear: both;
+}
+.post:before,
+.post:after,
+.feedPost:before,
+.feedPost:after,
+.postPanel:before,
+.postPanel:after,
+.comment:before,
+.comment:after {
+  content: " ";
+  display: table;
+}
+.post:after,
+.feedPost:after,
+.postPanel:after,
+.comment:after {
+  clear: both;
+}
+.post .img-avatar,
+.feedPost .img-avatar,
+.postPanel .img-avatar,
+.comment .img-avatar {
+  float: left;
+}
+.post .post-content,
+.feedPost .post-content,
+.postPanel .post-content,
+.comment .post-content {
+  float: left;
 }
 .appHeader {
   height: 52px;
   padding: 2px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.34);
+}
+.postPanel {
+  background: lightgray;
+}
+.postPanel .commentList {
+  clear: both;
 }
 
 /*# sourceMappingURL=../../exercise/css/exercise-main.css.map */

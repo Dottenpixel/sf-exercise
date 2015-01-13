@@ -1,6 +1,11 @@
 @import "../../../lib/bootstrap/less/bootstrap.less";
 
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
 .avatar {
+	background: white;
 	height: 48px;
 	width: 48px;
 	overflow: hidden;
@@ -10,12 +15,35 @@
 	}	
 }
 
+.post {
+	.clearfix;
+	.img-avatar:extend(.avatar all) {
+		float: left;
+	}
+	.post-content {
+		float: left;
+	}	
+}
+
 .appHeader {
 	height: 52px;
 	padding: 2px;
 	box-shadow: 0px 0px 10px fadeout(black, 66%);
 	.img-avatar:extend(.avatar all) {}
 }
+
 .feedPost {
-	.img-avatar:extend(.avatar all) {}
+	&:extend(.post all);
+}
+
+.postPanel {
+	background: lightgray;
+	&:extend(.post all);
+	.commentList {
+		clear: both;
+	}
+}
+
+.comment {
+	&:extend(.post all);
 }
