@@ -6293,6 +6293,11 @@ h5,
 h6 {
   margin: 0;
 }
+.commentApp.show-modal .appHeader,
+.commentApp.show-modal .feedList {
+  -webkit-filter: blur(4px);
+  filter: blur(4px);
+}
 .avatar,
 .post .img-avatar,
 .appHeader .img-avatar,
@@ -6362,15 +6367,34 @@ h6 {
   float: left;
 }
 .appHeader {
-  height: 52px;
-  padding: 2px;
+  padding: 15px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.34);
+}
+.feedList {
+  padding: 15px;
+}
+.feedPost {
+  padding: 15px;
+  border: 1px solid gray;
+  margin-bottom: 15px;
+}
+.feedPost .post-content {
+  padding-left: 15px;
 }
 .postPanel {
   background: lightgray;
 }
 .postPanel .commentList {
   clear: both;
+}
+.modal .modal-dialog {
+  position: fixed;
+  width: auto;
+  margin: auto;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
 }
 
 /*# sourceMappingURL=../../exercise/css/exercise-main.css.map */
