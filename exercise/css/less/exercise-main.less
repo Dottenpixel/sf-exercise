@@ -42,6 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .feedList {
+	position: relative;
 	padding: 15px;
 }
 
@@ -56,15 +57,61 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .postPanel {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
 	background: lightgray;
 	&:extend(.post all);
+	.panelBody {
+		padding: 15px;
+	}
 	.commentList {
 		clear: both;
 	}
+  left: 100%;
+  transition: left .5s ease-in;
+	&.postPanel-active {
+		left: 0%;
+		.commentForm {
+			bottom: 0%;
+		}
+	}
 }
+
+.slidePostPanel-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.slidePostPanel-enter.slidePostPanel-enter-active {
+  opacity: 1;
+}
+
+.slidePostPanel-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.slidePostPanel-leave.slidePostPanel-leave-active {
+  opacity: 0.01;
+}
+
 
 .comment {
 	&:extend(.post all);
+}
+
+.commentForm {
+	position: fixed;
+	bottom: -100%;
+	width: 100%;
+	background: lightgray;
+	margin: 0;
+	padding: 15px;
+	border-top: 1px solid gray;
+  transition: bottom .5s ease-in;
 }
 
 .modal {

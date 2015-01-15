@@ -25,39 +25,39 @@ var FeedList = React.createClass({
 			}
 		}
 	},
-	showPanel: function(postId) {
-		console.log("I got your click, rather dirty, but I got it", postId);
-		// show panel
-		// toggle active
-		// hopefully set state to trigger re-render
+	handleShowPanel: function(e) {
 		this.setState({ "data" : { 
 			"active" : true,
-			"currentActivePostId" : postId 
+			"currentActivePostId" : e.detail.postId 
 			} 
 		});
+	},
+	componentDidMount: function() {
+		window.addEventListener('show_panel', this.handleShowPanel);
+	},
+	componentWillUnmount: function() {
+		window.removeEventListener('show_panel', this.handleShowPanel);
 	},
 	render: function() {
 		var currentPost = this.props.feedData.first(function(o){ return o.postid === this.state.data.currentActivePostId }.bind(this));
 		var feedPosts = this.props.feedData.map(function (feedPost) {
 			return (
-				<FeedPost postData={feedPost} handleCommentLinkClick={this.showPanel} userId={this.props.userId} />
+				<FeedPost postData={feedPost} userId={this.props.userId} />
 			);
 		}.bind(this));
+		var panelClass = "postPanel" + ( this.state.data.active ? "-active" : "-inactive" );
 		return (
-			<div>
-				<div className="feedList">
+			<div className="feedList">
+				<div className="feedPosts">
 					{feedPosts}
 				</div>
-				<PostPanel className="postPanel" currentPost={currentPost} />
+				<PostPanel key="postPanelAnim" panelClass={panelClass} currentPost={currentPost} />
 			</div>
 		);
 	}
 });
 
 var FeedPost = React.createClass({
-	handleCommentLinkClick: function() {
-		this.props.handleCommentLinkClick(this.props.postData.postid);
-	},
 	render: function() {
 		var deleteBtn = this.props.postData.uid === this.props.userId ? <PostDeleteBtn postId={this.props.postData.postid} /> : "";
 		return (
@@ -74,7 +74,7 @@ var FeedPost = React.createClass({
 					<p className="feedPostContent">
 						{this.props.postData.content}
 					</p>
-					<CommentLink comments={this.props.postData.comments} handleCommentLinkClick={this.handleCommentLinkClick}  />
+					<CommentLink comments={this.props.postData.comments} postId={this.props.postData.postid} />
 				</div>
 			</div>
 		);
@@ -132,24 +132,29 @@ var PostDeletePromptModal = React.createClass({
 var PostPanel = React.createClass({
 	render: function() {
 		console.log(this.props);
-		return this.props.currentPost ? (
-			<div className="postPanel">
-				<div className="img-avatar">
-					<img src={this.props.currentPost.avatar} alt={this.props.currentPost.name}/>
-				</div>
-				<div className="post-content">
-					<h3 className="feedAuthor">
-						{this.props.currentPost.name}
-					</h3>
-					<TimeStamp timestamp={this.props.currentPost.timestamp} />
-					<p className="feedPostContent">
-						{this.props.currentPost.content}
-					</p>
-				</div>
-				<CommentList comments={this.props.currentPost.comments} />
-				<CommentComposeForm postId={this.props.currentPost.postid} />
+		var currentPost = this.props.currentPost ? (
+				<div className="panelBody">
+					<div className="img-avatar">
+						<img src={this.props.currentPost.avatar} alt={this.props.currentPost.name}/>
+					</div>
+					<div className="post-content">
+						<h3 className="feedAuthor">
+							{this.props.currentPost.name}
+						</h3>
+						<TimeStamp timestamp={this.props.currentPost.timestamp} />
+						<p className="feedPostContent">
+							{this.props.currentPost.content}
+						</p>
+					</div>
+					<CommentList comments={this.props.currentPost.comments} />
+				</div>) : (null);
+		var postId = this.props.currentPost ? this.props.currentPost.postid : null;
+		return (
+			<div className={"postPanel " + this.props.panelClass}>
+				{currentPost}
+				<CommentComposeForm postId={postId} />
 			</div>
-		) : (null);
+		);
 	}
 });
 
@@ -224,7 +229,8 @@ var TimeStamp = React.createClass({
 
 var CommentLink = React.createClass({
 	handleClick: function(e) {
-		this.props.handleCommentLinkClick();
+		e.preventDefault();
+		window.dispatchEvent(new CustomEvent('show_panel', { 'detail': { "postId" : this.props.postId } }));
 	},
 	render: function() {
 		var commentsCount = this.props.comments.length;
@@ -290,16 +296,18 @@ var CommentApp = React.createClass({
 	},
 	componentWillUnmount: function() {
 		window.removeEventListener('comment_added', this.handleCommentAdded);
-		window.addEventListener('delete_post_click', this.handleDeletePostClick);
-		window.addEventListener('delete_post_cancel', this.handleDeletePostCancel);
-		window.addEventListener('delete_post', this.handleDeletePost);
+		window.removeEventListener('delete_post_click', this.handleDeletePostClick);
+		window.removeEventListener('delete_post_cancel', this.handleDeletePostCancel);
+		window.removeEventListener('delete_post', this.handleDeletePost);
 	},
 	render: function() {
 		var appClass = "commentApp " + (this.state.data.modal.showModal ? "show-modal" : "");
 		return (
 			<div className={appClass} >
 				<AppHeader userData={this.state.data.user} />
-				<FeedList feedData={this.state.data.feed} userId={this.state.data.user.uid} />
+				<ReactCSSTransitionGroup transitionName="slidePostPanel">
+					<FeedList feedData={this.state.data.feed} userId={this.state.data.user.uid} />
+				</ReactCSSTransitionGroup>
 				<PostDeletePromptModal show={this.state.data.modal.showModal} postId={this.state.data.modal.currentPostId} />
 			</div>
 		);
