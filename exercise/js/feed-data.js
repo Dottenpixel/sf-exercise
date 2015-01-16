@@ -42,7 +42,7 @@ var feedData = [{
 	"comments": [{
 		"name": "Waylon Smithers",
 		"avatar" : "images/smithers.png",
-		"timestamp": "2015-01-13 18:34:24",
+		"timestamp": "2015-01-13 15:34:24",
 		"content": "You mean the revolver, sir?"
 	},
 	{
@@ -54,32 +54,8 @@ var feedData = [{
 	{
 		"name": "C. Montgomery Burns",
 		"avatar" : "images/mr_burns.png",
-		"timestamp": "2015-01-14 18:34:24",
-		"content": "Precisely."
-	},
-	{
-		"name": "C. Montgomery Burns",
-		"avatar" : "images/mr_burns.png",
-		"timestamp": "2015-01-14 18:34:24",
-		"content": "Precisely."
-	},
-	{
-		"name": "C. Montgomery Burns",
-		"avatar" : "images/mr_burns.png",
-		"timestamp": "2015-01-14 18:34:24",
-		"content": "Precisely."
-	},
-	{
-		"name": "C. Montgomery Burns",
-		"avatar" : "images/mr_burns.png",
-		"timestamp": "2015-01-14 18:34:24",
-		"content": "Precisely."
-	},
-	{
-		"name": "C. Montgomery Burns",
-		"avatar" : "images/mr_burns.png",
-		"timestamp": "2015-01-14 18:34:24",
-		"content": "Precisely."
+		"timestamp": "2015-01-14 18:34:54",
+		"content": "Excellent."
 	}]
 },
 {
