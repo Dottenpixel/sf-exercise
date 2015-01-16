@@ -3,14 +3,55 @@ React.initializeTouchEvents(true);
 
 var AppHeader = React.createClass({
 	getInitialState: function() {
-		return { data : userData };
+		return { data : {
+			"user" : userData,
+			"active" : false,
+			"isScrolling" : false
+			}
+		};
+	},
+	handleScroll: function(e) {
+		console.log(window.scrollY);
+		var newState = this.state;
+		newState.data.isScrolling = window.scrollY > 56;
+		this.setState(newState);
+		console.log(this.state.data);
+	},
+	handleClick: function(e) {
+		e.preventDefault();
+		window.dispatchEvent(new CustomEvent('hide_panel', { 'detail': { "postId" : this.props } }));
+	},
+	handleShowPanel: function(e) {
+		var newState = this.state;
+		newState.data.active = true;
+		this.setState(newState);
+	},
+	handleHidePanel: function(e) {
+		var newState = this.state;
+		newState.data.active = false;
+		this.setState(newState);
+	},
+	componentDidMount: function() {
+		window.addEventListener('show_panel', this.handleShowPanel);
+		window.addEventListener('hide_panel', this.handleHidePanel);
+		window.addEventListener('scroll', this.handleScroll);
+	},
+	componentWillUnmount: function() {
+		window.removeEventListener('show_panel', this.handleShowPanel);
+		window.removeEventListener('hide_panel', this.handleHidePanel);
+		window.removeEventListener('scroll', this.handleScroll);
 	},
 	render: function() {
-		console.log(this.state.data);
+		var backBtn = this.state.data.active ? (<button type="button" className="btn btn-default pull-left" onClick={this.handleClick}>&lsaquo; Back</button>) : (null);
+		var appClass = React.addons.classSet({
+			"appHeader" : true,
+			"is-scrolling" : this.state.data.isScrolling
+		});
 		return (
-			<div className="appHeader">
-				<div className="img-avatar">
-					<img src={this.state.data.avatar} alt={this.state.data.name} />
+			<div className={appClass}>
+				{backBtn}
+				<div className="img-avatar pull-right">
+					<img src={this.state.data.user.avatar} alt={this.state.data.user.name} />
 				</div>
 			</div>
 		);
@@ -32,11 +73,20 @@ var FeedList = React.createClass({
 			} 
 		});
 	},
+	handleHidePanel: function(e) {
+		this.setState({ "data" : { 
+			"active" : false,
+			"currentActivePostId" : null
+			} 
+		});
+	},
 	componentDidMount: function() {
 		window.addEventListener('show_panel', this.handleShowPanel);
+		window.addEventListener('hide_panel', this.handleHidePanel);
 	},
 	componentWillUnmount: function() {
 		window.removeEventListener('show_panel', this.handleShowPanel);
+		window.removeEventListener('hide_panel', this.handleHidePanel);
 	},
 	render: function() {
 		var currentPost = this.props.feedData.first(function(o){ return o.postid === this.state.data.currentActivePostId }.bind(this));
@@ -45,7 +95,10 @@ var FeedList = React.createClass({
 				<FeedPost postData={feedPost} userId={this.props.userId} />
 			);
 		}.bind(this));
-		var panelClass = "postPanel" + ( this.state.data.active ? "-active" : "-inactive" );
+		var panelClass = React.addons.classSet({
+			"postPanel" : true,
+			"postPanel-active" : this.state.data.active
+		});
 		return (
 			<div className="feedList">
 				<div className="feedPosts">
@@ -63,18 +116,22 @@ var FeedPost = React.createClass({
 		return (
 			<div className="feedPost">
 				{deleteBtn}
-				<div className="img-avatar">
-					<img src={this.props.postData.avatar} alt={this.props.postData.name}/>
-				</div>
-				<div className="post-content">
-					<h3 className="feedAuthor">
-						{this.props.postData.name}
-					</h3>
-					<TimeStamp timestamp={this.props.postData.timestamp} />
-					<p className="feedPostContent">
-						{this.props.postData.content}
-					</p>
-					<CommentLink comments={this.props.postData.comments} postId={this.props.postData.postid} />
+				<div className="row">
+					<div className="col-xs-3">
+						<div className="img-avatar">
+							<img src={this.props.postData.avatar} alt={this.props.postData.name}/>
+						</div>
+					</div>
+					<div className="post-content-area col-xs-9">
+						<h3 className="author">
+							{this.props.postData.name}
+						</h3>
+						<TimeStamp timestamp={this.props.postData.timestamp} />
+						<p className="feedPostContent">
+							{this.props.postData.content}
+						</p>
+						<CommentLink comments={this.props.postData.comments} postId={this.props.postData.postid} />
+					</div>
 				</div>
 			</div>
 		);
@@ -107,7 +164,11 @@ var PostDeletePromptModal = React.createClass({
 	},
 	render: function() {
 		var modalStyle = this.props.show ? { "display" : "block" } : null;
-		var modalClass = this.props.show ?  "modal fade in" : "modal fade";
+		var modalClass = React.addons.classSet({
+			"modal" : true,
+			"fade" : true,
+			"in" : this.props.show
+		});
 		return (
 			<div className={modalClass} style={modalStyle} onClick={this.handleCancelClick}>
 			  <div className="modal-dialog">
@@ -133,25 +194,34 @@ var PostPanel = React.createClass({
 	render: function() {
 		console.log(this.props);
 		var currentPost = this.props.currentPost ? (
-				<div className="panelBody">
-					<div className="img-avatar">
-						<img src={this.props.currentPost.avatar} alt={this.props.currentPost.name}/>
+			<span>
+				<div className="feedPost">
+					<div className="row">
+						<div className="col-xs-3">
+							<div className="img-avatar">
+								<img src={this.props.currentPost.avatar} alt={this.props.currentPost.name}/>
+							</div>
+						</div>
+						<div className="post-content-area col-xs-9">
+							<h3 className="author">
+								{this.props.currentPost.name}
+							</h3>
+							<TimeStamp timestamp={this.props.currentPost.timestamp} />
+							<p className="feedPostContent">
+								{this.props.currentPost.content}
+							</p>
+						</div>
 					</div>
-					<div className="post-content">
-						<h3 className="feedAuthor">
-							{this.props.currentPost.name}
-						</h3>
-						<TimeStamp timestamp={this.props.currentPost.timestamp} />
-						<p className="feedPostContent">
-							{this.props.currentPost.content}
-						</p>
-					</div>
-					<CommentList comments={this.props.currentPost.comments} />
-				</div>) : (null);
+				</div>
+				<CommentList comments={this.props.currentPost.comments} />
+			</span>
+		) : (null);
 		var postId = this.props.currentPost ? this.props.currentPost.postid : null;
 		return (
-			<div className={"postPanel " + this.props.panelClass}>
-				{currentPost}
+			<div className={this.props.panelClass}>
+				<div className="panelBody">
+					{currentPost}
+				</div>
 				<CommentComposeForm postId={postId} />
 			</div>
 		);
@@ -167,7 +237,6 @@ var CommentList = React.createClass({
 		})
 		return (
 			<div className="commentList">
-				<p>Comments:</p>
 				{ comments }
 			</div>
 		)
@@ -178,17 +247,21 @@ var Comment = React.createClass({
 	render: function() {
 		return (
 			<div className="comment">
-				<div className="img-avatar">
-					<img src={this.props.commentData.avatar} alt={this.props.commentData.name}/>
-				</div>
-				<div className="post-content">
-					<h3 className="commentAuthor">
-						{this.props.commentData.name}
-					</h3>
-					<TimeStamp timestamp={this.props.commentData.timestamp} />
-					<p className="commentContent">
-						{this.props.commentData.content}
-					</p>
+				<div className="row">
+					<div className="col-xs-3">
+						<div className="img-avatar">
+							<img src={this.props.commentData.avatar} alt={this.props.commentData.name}/>
+						</div>
+					</div>
+					<div className="post-content-area col-xs-9">
+						<h3 className="author">
+							{this.props.commentData.name}
+						</h3>
+						<TimeStamp timestamp={this.props.commentData.timestamp} />
+						<p className="comment-content">
+							{this.props.commentData.content}
+						</p>
+					</div>
 				</div>
 			</div>
 		)
@@ -211,7 +284,7 @@ var CommentComposeForm = React.createClass({
 		return (
 			<form className="commentForm" onSubmit={this.handleSubmit}>
 				<input type="text" placeholder="Write a comment..." ref="commentText" onChange={this.handleChange} />
-				<input type="submit" value="Post" disabled="disabled" ref="submit" />
+				<input type="submit" value="Post" disabled="disabled" ref="submit" className="" />
 			</form>
 		);
 	}
@@ -220,7 +293,7 @@ var CommentComposeForm = React.createClass({
 var TimeStamp = React.createClass({
 	render: function() {
 		return (
-			<div className="timeStamp">
+			<div className="time-stamp">
 				{moment(this.props.timestamp, "YYYY-MM-DD hh:mm:ss").fromNow()}
 			</div>
 		);
@@ -234,9 +307,10 @@ var CommentLink = React.createClass({
 	},
 	render: function() {
 		var commentsCount = this.props.comments.length;
+		var linkText = commentsCount === 0 ? (<span>Comment</span>) : (<span>{commentsCount} comment{commentsCount > 1 ? "s" : ""}</span>);
 		return (
 			<a className="commentLink" href="#" onClick={this.handleClick}>
-				{commentsCount} comment{commentsCount > 1 ? "s" : ""}
+				{linkText}
 			</a>
 		)
 	}
@@ -247,7 +321,8 @@ var CommentApp = React.createClass({
 		return { "data" : {
 			"feed" : feedData,
 			"user" : userData,
-			"modal" : {}
+			"modal" : {},
+			"isScrolling" : false
 			}
 		}
 	},
@@ -266,6 +341,7 @@ var CommentApp = React.createClass({
 			}
 		});
 		this.setState(newState);
+		window.dispatchEvent(new CustomEvent('hide_panel', { 'detail': { "postId" : this.props } }));
 	},
 	handleDeletePostClick: function(e) {
 		var newState = this.state;
@@ -301,7 +377,10 @@ var CommentApp = React.createClass({
 		window.removeEventListener('delete_post', this.handleDeletePost);
 	},
 	render: function() {
-		var appClass = "commentApp " + (this.state.data.modal.showModal ? "show-modal" : "");
+		var appClass = React.addons.classSet({
+			"commentApp" : true,
+			"show-modal" : this.state.data.modal.showModal
+		});
 		return (
 			<div className={appClass} >
 				<AppHeader userData={this.state.data.user} />

@@ -1,97 +1,98 @@
 var userData = {
 	"uid" : 1, 
 	"name" : "Homer Simpson",
-	"avatar" : "http://static.giantbomb.com/uploads/scale_small/0/4/12135-homer_simpson.gif"
+	"avatar" : "images/homer.png"
 };
 var feedData = [{
 	"postid" : 100,
 	"uid" : 1,
 	"name" : "Homer Simpson",
-	"avatar" : "http://static.giantbomb.com/uploads/scale_small/0/4/12135-homer_simpson.gif",
-	"timestamp" : "2015-01-04 08:07:24",
-	"content" : "Doh!",
+	"avatar" : "images/homer.png",
+	"timestamp" : "2015-01-14 08:07:24",
+	"content" : "Just once I'd like someone to call me 'Sir' without adding 'You're making a scene.'",
 	"comments" : [{
-		"name" : "Marge Simpson",
-		"avatar" : "./img",
-		"timestamp" : "2015-01-04 12:14:24",
-		"content" : "hrmmm"
+		"name" : "C. Montgomery Burns",
+		"avatar" : "images/mr_burns.png",
+		"timestamp" : "2015-01-14 12:14:24",
+		"content" : "Simpson, eh?"
 	},
 	{
 		"name" : "Ned Flanders",
-		"avatar" : "./img",
-		"timestamp" : "2015-01-05 18:34:24",
+		"avatar" : "images/flanders.png",
+		"timestamp" : "2015-01-15 18:34:24",
 		"content" : "Hi-de-ho"
-	},
-	{
-		"name" : "Nelson Muntz",
-		"avatar" : "./img",
-		"timestamp" : "2015-01-06 22:11:24",
-		"content" : "Ha ha"
 	}]
 },
 {
 	"postid" : 101,
 	"uid": 2,
-	"name": "John Smith",
-	"avatar" : "http://i.stack.imgur.com/lPgjT.jpg",
-	"timestamp": "2015-01-10 18:34:24",
-	"content": "Foo",
-	"comments": [{
-		"name": "Carol Fisher",
-		"avatar" : "./img",
-		"timestamp": "2015-01-10 18:34:24",
-		"content": "Foo"
-	},
-	{
-		"name": "Maggie Ford",
-		"avatar" : "http://i.imgur.com/eZTijdJ.jpg",
-		"timestamp": "2015-01-10 18:34:24",
-		"content": "Foo"
-	}]
+	"name": "Ralph Wiggum",
+	"avatar" : "images/ralph.png",
+	"timestamp": "2015-01-14 01:34:24",
+	"content": "The doctor said I wouldn't have so many nose bleeds if I kept my finger outta there. And, when the doctor said I didn't have worms any more, that was the happiest day of my life.",
+	"comments": []
 },
 {
 	"postid" : 102,
 	"uid": 3,
-	"name": "Jane Smith",
-	"avatar" : "./img",
-	"timestamp": "2015-01-09 21:21:24",
-	"content": "Foo",
+	"name": "C. Montgomery Burns",
+	"avatar" : "images/mr_burns.png",
+	"timestamp": "2015-01-12 21:21:24",
+	"content": "Quick Smithers. Bring the mind eraser device!",
 	"comments": [{
-		"name": "Carol Fisher",
-		"avatar" : "./img",
-		"timestamp": "2015-01-10 18:34:24",
-		"content": "Foo"
+		"name": "Waylon Smithers",
+		"avatar" : "images/smithers.png",
+		"timestamp": "2015-01-13 18:34:24",
+		"content": "You mean the revolver, sir?"
 	},
 	{
-		"name": "Carol Fisher",
-		"avatar" : "./img",
-		"timestamp": "2015-01-10 18:34:24",
-		"content": "Foo"
+		"name": "C. Montgomery Burns",
+		"avatar" : "images/mr_burns.png",
+		"timestamp": "2015-01-14 18:34:24",
+		"content": "Precisely."
+	},
+	{
+		"name": "C. Montgomery Burns",
+		"avatar" : "images/mr_burns.png",
+		"timestamp": "2015-01-14 18:34:24",
+		"content": "Precisely."
+	},
+	{
+		"name": "C. Montgomery Burns",
+		"avatar" : "images/mr_burns.png",
+		"timestamp": "2015-01-14 18:34:24",
+		"content": "Precisely."
+	},
+	{
+		"name": "C. Montgomery Burns",
+		"avatar" : "images/mr_burns.png",
+		"timestamp": "2015-01-14 18:34:24",
+		"content": "Precisely."
+	},
+	{
+		"name": "C. Montgomery Burns",
+		"avatar" : "images/mr_burns.png",
+		"timestamp": "2015-01-14 18:34:24",
+		"content": "Precisely."
+	},
+	{
+		"name": "C. Montgomery Burns",
+		"avatar" : "images/mr_burns.png",
+		"timestamp": "2015-01-14 18:34:24",
+		"content": "Precisely."
 	}]
 },
 {
 	"postid" : 103,
 	"uid": 4,
-	"name": "Cleveland Brown",
-	"avatar" : "./img",
+	"name": "Moe Szyslak",
+	"avatar" : "images/moe.png",
 	"timestamp": "2015-01-10 18:34:24",
-	"content": "Foo",
+	"content": "I've been called ugly, pug ugly, fugly, pug fugly, but never ugly ugly.",
 	"comments": [{
-		"name": "Carol Fisher",
-		"avatar" : "./img",
+		"name": "Bart Simpson",
+		"avatar" : "images/bart.png",
 		"timestamp": "2015-01-10 18:34:24",
-		"content": "Foo"
-	},
-	{
-		"name": "Maggie Ford",
-		"avatar" : "./img",
-		"timestamp": "2015-01-10 18:34:24",
-		"content": "Foo"
-	},
-	{
-		"name": "Carol Fisher",
-		"avatar" : "./img",
-		"timestamp": "2015-01-10 18:34:24",
-		"content": "Foo"
+		"content": "Aye carumba!"
 	}]
 }]
