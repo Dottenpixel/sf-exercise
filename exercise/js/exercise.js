@@ -11,11 +11,9 @@ var AppHeader = React.createClass({
 		};
 	},
 	handleScroll: function(e) {
-		console.log(window.scrollY);
 		var newState = this.state;
 		newState.data.isScrolling = window.scrollY > 56;
 		this.setState(newState);
-		console.log(this.state.data);
 	},
 	handleClick: function(e) {
 		e.preventDefault();
@@ -188,7 +186,6 @@ var PostDeletePromptModal = React.createClass({
 
 var PostPanel = React.createClass({
 	render: function() {
-		console.log(this.props);
 		var currentPost = this.props.currentPost ? (
 			<span>
 				<div className="feedPost">
