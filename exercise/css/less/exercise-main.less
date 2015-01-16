@@ -42,14 +42,8 @@ a {
 }
 
 .avatar {
-	background: white;
-	max-height: 48px;
-	max-width: 48px;
-	overflow: hidden;
 	border: 1px solid lighten(black, 70%);
-	img {
-		.img-responsive;
-	}	
+	.img-responsive;	
 }
 
 .post {
@@ -58,6 +52,7 @@ a {
 	.img-avatar:extend(.avatar all) {
 	}
 	.post-content-area {
+		.col-xs-9;
 		padding-left: 0;
 	}	
 	.author {

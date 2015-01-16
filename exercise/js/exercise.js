@@ -50,9 +50,7 @@ var AppHeader = React.createClass({
 		return (
 			<div className={appClass}>
 				{backBtn}
-				<div className="img-avatar pull-right">
-					<img src={this.state.data.user.avatar} alt={this.state.data.user.name} />
-				</div>
+				<img className="img-avatar pull-right" src={this.state.data.user.avatar} alt={this.state.data.user.name} />
 			</div>
 		);
 	}
@@ -118,9 +116,7 @@ var FeedPost = React.createClass({
 				{deleteBtn}
 				<div className="row">
 					<div className="col-xs-3">
-						<div className="img-avatar">
-							<img src={this.props.postData.avatar} alt={this.props.postData.name}/>
-						</div>
+						<img className="img-avatar" src={this.props.postData.avatar} alt={this.props.postData.name}/>
 					</div>
 					<div className="post-content-area col-xs-9">
 						<h3 className="author">
@@ -198,9 +194,7 @@ var PostPanel = React.createClass({
 				<div className="feedPost">
 					<div className="row">
 						<div className="col-xs-3">
-							<div className="img-avatar">
-								<img src={this.props.currentPost.avatar} alt={this.props.currentPost.name}/>
-							</div>
+							<img className="img-avatar" src={this.props.currentPost.avatar} alt={this.props.currentPost.name}/>
 						</div>
 						<div className="post-content-area col-xs-9">
 							<h3 className="author">
@@ -249,9 +243,7 @@ var Comment = React.createClass({
 			<div className="comment">
 				<div className="row">
 					<div className="col-xs-3">
-						<div className="img-avatar">
-							<img src={this.props.commentData.avatar} alt={this.props.commentData.name}/>
-						</div>
+						<img className="img-avatar" src={this.props.commentData.avatar} alt={this.props.commentData.name}/>
 					</div>
 					<div className="post-content-area col-xs-9">
 						<h3 className="author">

@@ -6325,18 +6325,7 @@ a {
 .feedPost .img-avatar,
 .postPanel .img-avatar,
 .comment .img-avatar {
-  background: white;
-  max-height: 48px;
-  max-width: 48px;
-  overflow: hidden;
   border: 1px solid #b3b3b3;
-}
-.avatar img,
-.post .img-avatar img,
-.appHeader .img-avatar img,
-.feedPost .img-avatar img,
-.postPanel .img-avatar img,
-.comment .img-avatar img {
   display: block;
   max-width: 100%;
   height: auto;
@@ -6385,6 +6374,7 @@ a {
 .feedPost .post-content-area,
 .postPanel .post-content-area,
 .comment .post-content-area {
+  width: 75%;
   padding-left: 0;
 }
 .post .author,
