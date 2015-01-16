@@ -3,6 +3,4 @@
 .sass-cache/*
 
 #Gulp-related files
-gulpfile.js
 node_modules/*
-reloadX.html
