@@ -6382,6 +6382,7 @@ a {
 .postPanel .author,
 .comment .author {
   font-size: 1.8rem;
+  margin-bottom: .5rem;
 }
 .appHeader {
   position: fixed;

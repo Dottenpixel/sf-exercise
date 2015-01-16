@@ -123,7 +123,7 @@ var FeedPost = React.createClass({
 							{this.props.postData.name}
 						</h3>
 						<TimeStamp timestamp={this.props.postData.timestamp} />
-						<p className="feedPostContent">
+						<p className="feed-post-content">
 							{this.props.postData.content}
 						</p>
 						<CommentLink comments={this.props.postData.comments} postId={this.props.postData.postid} />
@@ -201,7 +201,7 @@ var PostPanel = React.createClass({
 								{this.props.currentPost.name}
 							</h3>
 							<TimeStamp timestamp={this.props.currentPost.timestamp} />
-							<p className="feedPostContent">
+							<p className="feed-post-content">
 								{this.props.currentPost.content}
 							</p>
 						</div>
